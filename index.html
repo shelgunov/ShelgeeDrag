@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta charset="utf-8" />
+  <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+  <title>Demo:  «ShelgeeDrag»</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <script type="text/javascript" src="jquery.min.js"></script>
+  <script type="text/javascript" src="shelgee.drag.js"></script>
+  <style>
+  ::-webkit-scrollbar {width: 10px;}
+  ::-webkit-scrollbar-thumb {background: #E8E8E8;}
+  ::-webkit-scrollbar-thumb:hover {background:#979797; border-radius:50px;}
+  ::-webkit-scrollbar-track {background: #E8E8E8;}
+  *, *:before, *:after {-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}
+  html, body {margin: 0; padding: 0; background: #C2CDD3;}
+  .font {font-family: Candara,Calibri,Roboto,Helvetica,Corbel,Arial,sans-serif;}
+  .bar{
+  width: 100%;
+  height: 62px;
+  bottom: 0px;
+  position: fixed;
+  border-top: solid 2px #B6C0C6;
+  background: white;
+  background: -moz-linear-gradient(top, #ffffff 0%, #e9eaeb 100%);
+  background: -webkit-linear-gradient(top, #ffffff 0%,#e9eaeb 100%);
+  background: linear-gradient(to bottom, #ffffff 0%,#e9eaeb 100%);
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e9eaeb',GradientType=0 );
+  -webkit-box-shadow: 0px -5px 5px 0px rgba(140,140,140,0.1);
+  -moz-box-shadow: 0px -5px 5px 0px rgba(140,140,140,0.1);
+  box-shadow: 0px -5px 5px 0px rgba(140,140,140,0.1);
+  }
+  .bar h1, .bar a{
+  height: 24px;
+  margin: 19px 0 0 30px;
+  padding: 0px;
+  font-size: 19px;
+  font-weight: Normal;
+  line-height: 21px;
+  color: #424242;
+  float: left;
+  }
+  .bar a{
+  background: url('data:image/png;base64,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') right no-repeat;
+  margin: 17px 30px 0 0;
+  padding: 2px 40px 0 0;
+  text-decoration: none;
+  float: right;
+  }
+  .bar a:hover {
+  text-decoration:underline;
+  }
+  .window{
+  width: 700px;
+  height: 450px;
+  margin: 5% auto;
+  background: white;
+  border-bottom: solid 2px #B6C0C6;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  }
+  .window-title{
+  width: 100%;
+  height: 40px;
+  padding: 9px 0 0 20px;
+  color: #4D606B;
+  background: #E2E8EB;
+  float: left;
+  cursor: move;
+  -webkit-top-left-border-radius: 4px;
+  -webkit-top-right-border-radius: 4px;
+  -moz-top-left-border-radius: 4px;
+  -moz-top-right-border-radius: 4px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  }
+  .window-content{
+  width: 700px;
+  height: 410px;
+  float: left;
+  }
+  .circle{
+  width: 140px;
+  height: 140px;
+  margin: 135px 0 0 280px;
+  padding: 58px 0 0 0;
+  border: solid 2px #B6C0C6;
+  background: #E2E8EB;
+  text-align: center;
+  color: #4D606B;
+  float: left;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  border-radius: 100px;
+  transition:background 0.3s ease;
+  cursor: move;
+  }
+  .circle:hover{
+  background: #EBEDF0;
+  }
+  </style>
+</head>
+<body>
+
+<script type="text/javascript">
+$(function(){
+
+  //Drag: "window-title"  &  Move: "window"
+  $('.window-title').ShelgeeDrag(".window");
+  
+  //Drag&Move: "circle"
+  $('.circle').ShelgeeDrag();
+  
+});
+</script>
+
+<div class="window">
+ <div class="window-title font">Drag me</div>
+ <div class="window-content"><div class="circle font">Drag me</div></div>
+</div>
+
+<div class="bar"><h1 class="font">Demo:&nbsp;&nbsp;  « ShelgeeDrag »</h1><a class="font" href="http://github.com/shelgunov">on GitHub</a></div>
+
+</body>
+</html>
